@@ -1,0 +1,382 @@
+/*-----Adam Demol 2022-----*/
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  background-color: var(--theme-red);
+  color: #ededed;
+}
+
+.loginwrap {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-left: auto;
+}
+
+.signin {
+  padding: 10px 15px;
+  background: #111;
+  color: #eee;
+  transition: 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  margin-left: auto;
+}
+
+.signin:hover { background: var(--theme-bone); color: #111; }
+
+.username {
+  font-weight: bold;
+}
+
+.App {
+  display: flex;
+}
+
+.left {
+  width: 40vw;
+  max-height: calc(100vh - 100px);
+  padding: 2rem;
+  overflow-y: auto;
+  background: var(--theme-bone);
+}
+
+.left h1 {
+  margin-bottom: 2rem;
+}
+
+.right {
+  width: 60vw;
+  padding: 2rem;
+  background: #fff;
+}
+
+.right h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  color: white;
+  background-color: #4a545e;
+  padding: 2rem;
+  width: 500px;
+  height: 500px;
+  pointer-events: none;
+  box-shadow: 0 0 0 10000px rgba(24, 24, 24, 0.7);
+  z-index: 9999;
+}
+
+.popup .heading {
+  font-size: 1.6rem;
+}
+
+.popup textarea {
+  width: 300px;
+  max-width: 350px;
+  height: 200px;
+}
+
+.submitBtn {
+  padding: 1rem 2rem;
+}
+
+.closePopup {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/*--- Local storage left pane ---*/
+
+.lsItemsWrap {
+  display: grid;
+  gap: 3rem;
+}
+
+.yearEventWrap{
+  display: grid;
+  gap: 1rem;
+  border: 5px solid #a3a193;
+  padding: 1rem;
+}
+
+.monthEventWrap {
+  display: grid;
+  gap: 1rem;
+}
+
+.lsItem {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 20px;
+  gap: 1rem;
+  background-color: var(--theme-blue);
+  color: #ededed;
+  padding: 1rem;
+  align-items: center;
+}
+
+.lsItem:hover { background-color: var(--theme-red); }
+
+.lsItem:hover svg { background: var(--theme-red); }
+
+.lsItemText {
+  display: grid;
+  gap: .6rem;
+}
+
+.removeBtn, .editbtn {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  fill: white;
+  background: var(--theme-blue);
+}
+
+.editbtn:hover .editTooltip {
+  top: 30px;
+  opacity: 1;
+}
+
+.removeBtn:hover .removeTooltip {
+  top: 40px;
+  opacity: 1;
+}
+
+.editTooltip, .removeTooltip {  
+  opacity: 0;
+  pointer-events: none;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background-color: white;
+  height: 3rem;
+  z-index: 88888;
+  transition: 200ms ease-in-out;
+}
+
+.editTooltip {
+  top: 50px;
+  left: 30px;
+  width: 10rem;
+}
+
+.removeTooltip {
+  top: 50px;
+  left: -100px;
+  width: 8rem;
+}
+
+.upArrow {
+  position: absolute;
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid white;
+  z-index: 99999;
+}
+
+.editTooltip .upArrow {
+  top: -5px;
+  left: 10px;
+}
+
+.removeTooltip .upArrow {
+  top: -5px;
+  right: 15px;
+}
+
+.saveChanges {
+  background: var(--theme-bone);
+  width: 60px;
+  height: 30px;
+}
+
+.updateMessage {
+  position: absolute;
+  opacity: 0;
+  background: var(--theme-blue);
+  border: 2px solid var(--theme-blue);
+  color: white;
+  padding: 1rem 2rem;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: 250ms ease-in-out;
+}
+
+/*-----Calendar styles-----*/
+
+.datepickerContainer {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 750px;
+  height: fit-content;
+  text-align: center;
+  box-shadow: 3px 3px 15px #4b4b4b;
+  color: #111;
+}
+
+.datepickerDates {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.datepickerHeader {
+  background:linear-gradient(var(--theme-blue), #566064);
+  color: white;
+  font-size: 1.1rem;
+}
+
+.datepickerDates .pickYearSelect, .pickMonthSelect {
+  padding: 5px 20px;
+}
+
+.pickYear {
+  display: flex;
+  gap: 1rem;
+}
+
+.pickMonth {
+  display: flex;
+  gap: 1rem;
+}
+
+.datepickerDaysRow {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(7, 1fr);
+  height: 4rem;
+}
+
+.datepickerDaysRow .day { 
+  padding-block: 20px;
+}
+
+.date {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: unset;
+  color: white;
+  background-color: var(--theme-blue);
+  font-size: 1.1rem;
+}
+
+.date:hover {
+  background: var(--theme-red);
+  color: #fff;
+}
+
+.eventNumber {
+  pointer-events: none;
+  display: none;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  font-size: .9rem;
+  z-index: 99;
+  background-color: var(--theme-red);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.dateRange{
+  display: grid;
+  margin: 20px 0;
+}
+
+.monthWrap {
+  display: grid;
+  grid-template-columns:repeat(7, auto);
+  gap: 1px;
+  background: #566064;
+  color: white;
+}
+
+.hide { display: none; }
+
+.show { display: grid; }
+
+.notCurrentMonth { color:#696969; }
+
+.today { background-color: #E0DFD5; color: #111; }
+
+@media screen and (max-width: 799px) {
+
+  .App {
+    display: grid;
+  }
+
+  .header {
+    padding: 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.6rem;
+  }
+
+  .left {
+    width: unset;
+    max-height: 35vh;
+    padding: 1rem;
+  }
+
+  .left h1 {
+    margin-bottom: unset;
+  }
+
+  .right {
+    width: unset;
+    padding: 1rem;
+    box-shadow: -5px 0 15px 0 #111;
+  }
+
+  .right h2 {
+    margin-bottom: 1rem;
+  }
+
+  .eventNumber {
+    width: 15px;
+    height: 15px;
+  }
+
+  .popup {
+    width: 350px;
+    height: 400px;
+  }
+
+  .popup textarea {
+    width: 250px;
+    height: 150px;
+  }
+
+  .closePopup {
+    top: -5px;
+    right: -5px;
+    width: 30px;
+    height: 30px;
+  }
+
+}
