@@ -29,7 +29,7 @@ type calendarProps = {
   eventItems: calendarEventProps[]
 }
 
-export default function Calendar() {
+export default function Calendar({ setPopupIsVisible, setSelectedDate, eventItems }: calendarProps) {
 
   let yearSelect: HTMLSelectElement | undefined;
   let monthSelect: HTMLSelectElement | undefined;
