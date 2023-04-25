@@ -5,7 +5,7 @@ type calendarEventProps = {
   id: string;
   date: string;
   description: string;
-  authorEmail: string;
+  author: string
 }
 
 type dayOptionProps = {
@@ -29,12 +29,12 @@ export default function DayOption({ day, monthSelect, setPopupIsVisible, setSele
 
   onMount(() => {
     let count = 0
-    eventItems.map(item => {
-      if (new Date(item.date).toLocaleString('en-au') === new Date(day).toLocaleString('en-au')) {
-        count += 1
-      }
-    })
-    setNumEvents(count)
+    // eventItems().map(item => {
+    //   if (new Date(item.date).toLocaleString('en-au') === new Date(day).toLocaleString('en-au')) {
+    //     count += 1
+    //   }
+    // })
+    setNumEvents(0)
   })
 
   return (
