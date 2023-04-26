@@ -26,10 +26,10 @@ type calendarEventProps = {
 type calendarProps = {
   setPopupIsVisible: (args: boolean) => void,
   setSelectedDate: (args: string) => void,
-  eventItems: calendarEventProps[]
+  eventItems: () => calendarEventProps[]
 }
 
-export default function Calendar({ setPopupIsVisible, setSelectedDate, eventItems }: calendarProps) {
+export default function Calendar(props: calendarProps) {
 
   let yearSelect: HTMLSelectElement | undefined;
   let monthSelect: HTMLSelectElement | undefined;
@@ -41,7 +41,7 @@ export default function Calendar({ setPopupIsVisible, setSelectedDate, eventItem
   })
 
   createEffect(() => {
-    console.log(eventItems)
+    console.log(props.eventItems())
   })
 
   return (
@@ -97,10 +97,10 @@ export default function Calendar({ setPopupIsVisible, setSelectedDate, eventItem
               {(day) =>  
               <DayOption 
                 monthSelect={monthSelect}
-                setPopupIsVisible={setPopupIsVisible}
-                setSelectedDate={setSelectedDate}
+                setPopupIsVisible={props.setPopupIsVisible}
+                setSelectedDate={props.setSelectedDate}
                 day={day}
-                eventItems={eventItems}
+                eventItems={props.eventItems}
               />}
             </For>
             </div>
