@@ -16,12 +16,17 @@ export async function GET({ request, params }: APIEvent) {
 export async function POST({ request, params }: APIEvent) {
   const session = await getUserSession(request);
   const userId = session.get("userId");
+
   if (!userId) return new Response("Not logged in!", { status: 401 })
+
+  const bodyData = await request.json()
+  const date = new Date(bodyData.date); // can't pass date object to server, so convert here
+  const description = bodyData.desc;
 
   await createEvent({
     id: userId, 
-    date: new Date(), 
-    description: 'testing'
+    date: date, 
+    description: description
   }).catch(err => new Response(err))
 
   return json("event created");
