@@ -5,6 +5,7 @@ import Calendar from "~/components/calendar";
 import { createSignal, onMount } from "solid-js";
 import Events from "~/components/events";
 import styles from "../components/styles.module.css"
+import NewEventPopup from "~/components/newEventPopup";
 
 export function routeData() {
   return useUser();
@@ -48,8 +49,15 @@ export default function Home() {
         <Calendar 
           setPopupIsVisible={setPopupIsVisible}
           setSelectedDate={setSelectedDate}
-          eventItems={eventItems()}
+          eventItems={eventItems}
         />
+
+        {popupIsVisible() && 
+        <NewEventPopup 
+          setPopupIsVisible={setPopupIsVisible}
+          popupIsVisible={popupIsVisible}
+          selectedDate={selectedDate}
+        />}
       </main>
     </>
   );
