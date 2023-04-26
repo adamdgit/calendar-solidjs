@@ -58,19 +58,17 @@
 }
 
 .popup {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   align-items: center;
+  justify-items: center;
   gap: 1rem;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
-  color: white;
-  background-color: #4a545e;
-  padding: 2rem;
-  width: 500px;
-  height: 500px;
+  color: #111;
+  background-color: var(--theme-bone);
+  padding: 2rem 4rem;
   pointer-events: none;
   box-shadow: 0 0 0 10000px rgba(24, 24, 24, 0.7);
   z-index: 9999;
@@ -83,7 +81,7 @@
 .popup textarea {
   width: 300px;
   max-width: 350px;
-  height: 200px;
+  height: 120px;
 }
 
 .submitBtn {
@@ -99,9 +97,14 @@
   border-radius: 50%;
 }
 
+.closePopup:hover {
+  background-color: var(--theme-red);
+  color: white;
+}
+
 /*--- Local storage left pane ---*/
 
-.lsItemsWrap {
+.eventsWrap {
   display: grid;
   gap: 3rem;
 }
@@ -118,7 +121,7 @@
   gap: 1rem;
 }
 
-.lsItem {
+.eventItem {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 20px;
@@ -129,11 +132,11 @@
   align-items: center;
 }
 
-.lsItem:hover { background-color: var(--theme-red); }
+.eventItem:hover { background-color: var(--theme-red); }
 
-.lsItem:hover svg { background: var(--theme-red); }
+.eventItem:hover svg { background: var(--theme-red); }
 
-.lsItemText {
+.eventItemText {
   display: grid;
   gap: .6rem;
 }
