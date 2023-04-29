@@ -3,7 +3,8 @@ import styles from "./styles.module.css"
 type popupProps = {
   setPopupIsVisible: (args: boolean) => void,
   popupIsVisible: () => boolean,
-  selectedDate: () => string
+  selectedDate: () => string,
+  setEventItems: (args: any) => void
 }
 
 export default function NewEventPopup(props : popupProps) {
@@ -11,6 +12,8 @@ export default function NewEventPopup(props : popupProps) {
   let description: HTMLTextAreaElement | undefined;
 
   async function createNewEvent(date: string, description: string) {
+    props.setPopupIsVisible(false)
+    
     await fetch(`/api/events`, {
       method: 'POST',
       body: JSON.stringify({
@@ -19,7 +22,7 @@ export default function NewEventPopup(props : popupProps) {
       }),
     })
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => props.setEventItems(data))
     .catch(err => console.error(err))
   }
 
