@@ -60,6 +60,7 @@ export default function Home() {
           setPopupIsVisible={setPopupIsVisible}
           popupIsVisible={popupIsVisible}
           selectedDate={selectedDate}
+          setEventItems={setEventItems}
         />}
       </main>
     </>
