@@ -40,9 +40,6 @@ export default function Calendar(props: calendarProps) {
     setCalendarData(calcCalendarDays(monthSelect!.value, yearSelect!.value));
   })
 
-  createEffect(() => {
-    console.log(props.eventItems())
-  })
 
   return (
     <aside class={styles.right}>
@@ -53,14 +50,13 @@ export default function Calendar(props: calendarProps) {
             <div class={styles.datepickerDates}>
               <span class={styles.pickYear}>Year: 
                 <select ref={yearSelect} onChange={() => setCalendarData(calcCalendarDays(monthSelect!.value, yearSelect!.value))}>
-                  {
-                    yearData.map(year => (
+                  <For each={yearData}>
+                    {(year) => 
                       <option 
                         value={year.toString()}>
                         {year.toString()}
-                      </option>
-                    ))
-                  }
+                      </option>}
+                  </For>
                 </select>
               </span>
               <span class={styles.pickMonth}>Month: 
@@ -68,14 +64,13 @@ export default function Calendar(props: calendarProps) {
                   ref={monthSelect}
                   value={new Date().getMonth()}
                   onChange={() => setCalendarData(calcCalendarDays(monthSelect!.value, yearSelect!.value))}>
-                  {
-                    monthData.map((month, i) => (
-                      <option
-                        value={i}>
+                  <For each={monthData}>
+                    {(month, i) => 
+                      <option 
+                        value={i()}>
                         {month}
-                      </option>
-                    ))
-                  }
+                      </option>}
+                  </For>
                 </select>
               </span>
             </div>
