@@ -10,6 +10,7 @@ export async function GET({ request, params }: APIEvent) {
 
   const data = await getEventsByUserID(userId)
     .catch(err => console.error(err))
+
   return json(data);
 }
 
@@ -29,5 +30,8 @@ export async function POST({ request, params }: APIEvent) {
     description: description
   }).catch(err => new Response(err))
 
-  return json("event created");
+  const data = await getEventsByUserID(userId)
+    .catch(err => console.error(err))
+    
+  return json(data);
 }
