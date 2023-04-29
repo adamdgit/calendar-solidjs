@@ -44,7 +44,10 @@ export default function Home() {
       <Header user={user} />
 
       <main class={styles.app}>
-        <Events eventItems={eventItems}/>
+        <Events 
+          eventItems={eventItems}
+          setEventItems={setEventItems}
+        />
             
         <Calendar 
           setPopupIsVisible={setPopupIsVisible}
