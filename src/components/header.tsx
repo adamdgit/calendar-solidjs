@@ -15,7 +15,7 @@ export default function Header({ user }:any) {
       <h1>Calendar organiser</h1>
       <Form>
         <p>Hello {user()?.username}</p>
-        <button name="logout" type="submit">
+        <button name="logout" type="submit" class={styles.signin}>
           Logout
         </button>
       </Form>
