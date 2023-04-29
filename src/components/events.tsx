@@ -1,4 +1,4 @@
-import { For, createEffect, onMount } from "solid-js";
+import { For, onMount } from "solid-js";
 import styles from "./styles.module.css"
 
 import EventItem from "./eventItem";
