@@ -1,4 +1,4 @@
-import { For, onMount } from "solid-js";
+import { For, createMemo, createSignal } from "solid-js";
 import styles from "./styles.module.css"
 
 import EventItem from "./eventItem";
@@ -16,6 +16,9 @@ type eventProps = {
 }
 
 export default function Events(props: eventProps) {
+
+  const [months, setMonths] = createSignal<string[]>([]);
+  const [years, setYears] = createSignal<string[]>([]);
 
   async function deleteEventByID(id: string) {
     await fetch(`/api/events/${id}`, {
@@ -50,21 +53,46 @@ export default function Events(props: eventProps) {
     .catch(err => console.error(err))
   }
 
-  onMount(() => {
-    console.log(props.eventItems())
+  createMemo(() => {
+    let tempMonths:string[] = [];
+    props.eventItems().map(item => {
+      tempMonths.push(new Date(item.date).toLocaleString('en-au', {month: 'long', year: 'numeric'}))
+    });
+    // remove duplicates using set and spread operator
+    setMonths([...new Set(tempMonths)]);
+
+    let tempYears:string[] = [];
+    props.eventItems().map(item => {
+      tempYears.push(new Date(item.date).toLocaleString('en-au', {year: 'numeric'}))
+    });
+    // remove duplicates using set and spread operator
+    setYears([...new Set(tempYears)]);
   })
 
   return (
     <aside class={styles.left}>
+      <div class={styles.eventsWrap}>
       {props.eventItems() && 
-      <For each={props.eventItems()}>
-        {(event) =>  
-          <EventItem 
-            event={event}
-            deleteEventByID={deleteEventByID}
-            updateEventByID={updateEventByID}
-          />}
-      </For>}
+      years().map((year) => 
+        <div class={styles.yearEventWrap}>
+          <h3>{year}</h3>
+          {months().sort((a, b) => Date.parse(a) - Date.parse(b)).map(month => 
+          new Date(month).toLocaleString('en-au', {year: 'numeric'}) === year ?
+          <div class={styles.monthEventWrap}>
+            <h4>{month}</h4>
+            <For each={props.eventItems().sort((a, b) => Date.parse(a.date) - Date.parse(b.date))}>
+              {(event) => 
+                new Date(event.date).toLocaleString('en-au', {month: 'long', year: 'numeric'}) === month ? 
+                <EventItem 
+                  event={event}
+                  deleteEventByID={deleteEventByID}
+                  updateEventByID={updateEventByID}
+                /> : null}
+            </For>
+          </div> : null
+          )}
+        </div>)}
+      </div>
     </aside>
   )
 }
