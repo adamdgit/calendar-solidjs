@@ -329,7 +329,7 @@
 
 @media screen and (max-width: 799px) {
 
-  .App {
+  .app {
     display: grid;
   }
 
