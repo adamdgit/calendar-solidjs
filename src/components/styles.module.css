@@ -1,5 +1,48 @@
 /*-----Adam Demol 2022-----*/
 
+.main {
+  margin: 10vh auto;
+  display: block;
+  height: fit-content;
+}
+
+.main h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form {
+  font-size: 1.1rem;
+  display: grid;
+  gap: 1.5rem;
+  padding: 4rem;
+  background-color: var(--theme-red);
+  color: white;
+  width: 100%;
+  min-width: 300px;
+  max-width: 600px;
+}
+
+.form fieldset {
+  display: grid;
+}
+
+.usernameField {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+}
+
+.passwordField {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+}
+
+.login {
+  background-color: var(--theme-bone);
+  width: 150px;
+  height: 35px;
+}
+
 .header {
   display: flex;
   align-items: center;

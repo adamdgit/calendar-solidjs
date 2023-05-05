@@ -8,6 +8,7 @@ import {
 } from "solid-start/server";
 import { db } from "~/db";
 import { createUserSession, getUser, login, register } from "~/db/session";
+import styles from "../components/styles.module.css"
 
 function validateUsername(username: unknown) {
   if (typeof username !== "string" || username.length < 3) {
@@ -91,9 +92,9 @@ export default function Login() {
   });
 
   return (
-    <main>
+    <main class={styles.main}>
       <h1>Login</h1>
-      <Form>
+      <Form class={styles.form}>
         <input
           type="hidden"
           name="redirectTo"
@@ -109,16 +110,16 @@ export default function Login() {
             <input type="radio" name="loginType" value="register" /> Register
           </label>
         </fieldset>
-        <div>
+        <div class={styles.usernameField}>
           <label for="username-input">Username</label>
-          <input name="username" placeholder="kody" />
+          <input name="username" />
         </div>
         <Show when={loggingIn.error?.fieldErrors?.username}>
           <p role="alert">{loggingIn.error.fieldErrors.username}</p>
         </Show>
-        <div>
+        <div class={styles.passwordField}>
           <label for="password-input">Password</label>
-          <input name="password" type="password" placeholder="twixrox" />
+          <input name="password" type="password" />
         </div>
         <Show when={loggingIn.error?.fieldErrors?.password}>
           <p role="alert">{loggingIn.error.fieldErrors.password}</p>
@@ -128,7 +129,7 @@ export default function Login() {
             {loggingIn.error.message}
           </p>
         </Show>
-        <button type="submit">{data() ? "Login" : ""}</button>
+        <button class={styles.login} type="submit">{data() ? "Login" : ""}</button>
       </Form>
     </main>
   );
