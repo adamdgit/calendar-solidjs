@@ -4,7 +4,7 @@ import vercel from "solid-start-vercel"
 
 export default defineConfig({
   plugins: [solid({
-    adapter: vercel(),
+    adapter: vercel({}),
   })],
   ssr: { external: ["@prisma/client"] },
 });
