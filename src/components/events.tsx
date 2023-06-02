@@ -79,7 +79,7 @@ export default function Events(props: eventProps) {
           {months().sort((a, b) => Date.parse(a) - Date.parse(b)).map(month => 
           new Date(month).toLocaleString('en-au', {year: 'numeric'}) === year ?
           <div class={styles.monthEventWrap}>
-            <h4>{month}</h4>
+            <h4>{new Date(month).toLocaleString('en-au', {month: 'long'})}</h4>
             <For each={props.eventItems().sort((a, b) => Date.parse(a.date) - Date.parse(b.date))}>
               {(event) => 
                 new Date(event.date).toLocaleString('en-au', {month: 'long', year: 'numeric'}) === month ? 
