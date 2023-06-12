@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { redirect } from "solid-start/server";
 import { createCookieSessionStorage } from "solid-start/session";
 import { db } from ".";
+import { hash, genSalt, compare } from "bcryptjs";
 
 type LoginForm = {
   username: string;
@@ -15,17 +16,19 @@ type loginData = {
 } | null
 
 export async function register({ username, password }: LoginForm) {
+  // hasing password with argon
+  const salt = await genSalt(10);
+  const hashpw = await hash(password, salt);
   return db.user.create({
-    data: { username: username, password },
+    data: { username: username, password: hashpw },
   });
 }
 
 export async function login({ username, password }: LoginForm) {
   const user:loginData = await db.user.findUnique({ where: { username } });
   if (!user) return null;
-  const isCorrectPassword = password === user.password;
-  if (!isCorrectPassword) return null;
-  return user
+  if (await compare(password, user.password)) return user
+  else return null
 }
 
 // const sessionSecret = import.meta.env.SESSION_SECRET;
