@@ -8,8 +8,6 @@ export default function Header({ user }:any) {
     logout(request)
   );
 
-  console.log(user())
-
   return (
     <header class={styles.header}>
       <h1>Calendar organiser</h1>
