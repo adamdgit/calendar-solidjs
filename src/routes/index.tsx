@@ -34,7 +34,7 @@ export default function Home() {
       .then(res => res.json())
       .then(data => setEventItems(data))
   }
-
+  
   onMount(() => {
     getUsersEvents()
   })
