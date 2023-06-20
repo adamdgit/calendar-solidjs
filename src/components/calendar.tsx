@@ -33,13 +33,13 @@ export default function Calendar(props: calendarProps) {
 
   let yearSelect: HTMLSelectElement | undefined;
   let monthSelect: HTMLSelectElement | undefined;
+
   const [calendarData, setCalendarData] = createSignal<Date[]>([])
 
   onMount(() => {
-    // set current month 
+    monthSelect!.value = String(new Date().getMonth());
     setCalendarData(calcCalendarDays(monthSelect!.value, yearSelect!.value));
   })
-
 
   return (
     <aside class={styles.right}>
@@ -62,7 +62,6 @@ export default function Calendar(props: calendarProps) {
               <span class={styles.pickMonth}>Month: 
                 <select 
                   ref={monthSelect}
-                  value={new Date().getMonth()}
                   onChange={() => setCalendarData(calcCalendarDays(monthSelect!.value, yearSelect!.value))}>
                   <For each={monthData}>
                     {(month, i) => 
@@ -87,17 +86,17 @@ export default function Calendar(props: calendarProps) {
           </div>
 
           <div class={styles.datepickerBody}>
-            <div class={styles.monthWrap} data-month={monthSelect?.value} data-year={yearSelect?.value} >
-            <For each={calendarData()}>
-              {(day) =>  
-              <DayOption 
-                monthSelect={monthSelect}
-                setPopupIsVisible={props.setPopupIsVisible}
-                setSelectedDate={props.setSelectedDate}
-                day={day}
-                eventItems={props.eventItems}
-              />}
-            </For>
+            <div class={styles.monthWrap}>
+              <For each={calendarData()}>
+                {(day) =>  
+                <DayOption 
+                  monthSelect={monthSelect}
+                  setPopupIsVisible={props.setPopupIsVisible}
+                  setSelectedDate={props.setSelectedDate}
+                  day={day}
+                  eventItems={props.eventItems}
+                />}
+              </For>
             </div>
           </div>
         </div>
